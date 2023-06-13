@@ -1,0 +1,32 @@
+<app-menu-page></app-menu-page>
+
+<div class="col-12">
+  <div class="container">
+    <mat-card class="full-width">
+      <mat-card-title class="centered-text">Login</mat-card-title>
+      <mat-card-content>
+        <form>
+          <div class="row pad">
+            <mat-form-field>
+              <mat-label>Username:</mat-label>
+              <input type="text" matInput>
+            </mat-form-field>
+          </div>
+          <div class="row pad">
+            <mat-form-field>
+              <mat-label>Password:</mat-label>
+              <input type="text" matInput>
+            </mat-form-field>
+          </div>
+        </form>
+        <div class="row pad">
+          <button mat-raised-button color="warn">Login</button>
+        </div>
+        <div class="centered-text">
+          <span class="message-text">Don't have an account? </span>
+          <a (click)="navigateToSignUp()" class="primary-color">Sign Up</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
