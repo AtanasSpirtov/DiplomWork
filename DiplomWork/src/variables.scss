@@ -1,0 +1,106 @@
+@import '~@angular/material/theming';
+@import 'main-theme.scss';
+
+$lightThemeForeground: map-get($theme, foreground);
+$darkThemeForeground: map-get($altTheme, foreground);
+
+$lightThemeBackground: map-get($theme, background);
+$darkThemeBackground: map-get($altTheme, background);
+$lightThemeHoverColor: rgba(mat-color($lightThemeBackground, hover), 0.04);
+$darkThemeHoverColor: rgba(mat-color($darkThemeBackground, hover), 0.04);
+
+$primary-color: mat-color($theme-primary);
+$accent-color: mat-color($theme-accent);
+$error-color: mat-color($theme-warn);
+$warning-color: #ff9900;
+$neon-color: #2E3192;
+$background-color-light-theme: mat-color($lightThemeBackground,  card);
+$background-color-dark-theme: mat-color($darkThemeBackground, card);
+$opacity: 0.3;
+
+$content-distance-from-top: 80px;
+$gcp-margin: 20px;
+$person-image-size: 50px;
+$body-bg-color: #fafafa;
+$selected-bg: #dbdbdb;
+$light-border-color: #dbdbdb;
+$terminal-bg-color: #222222;
+$header-title-dark: #424250;
+$header-title-light: #ffffff;
+
+$default-font-family: 'GothamPro', sans-serif;
+$default-font-family-light: 'GothamPro-Light', sans-serif;
+$default-font-family-bold: 'GothamPro-Bold', sans-serif;
+$default-font-family-black: 'GothamPro-Black', sans-serif;
+
+
+
+$weak-text-color-light-theme: rgba(mat-color($lightThemeForeground, text), 0.7);
+$weak-text-color-dark-theme: rgba(mat-color($darkThemeForeground, text), 0.7);
+$border-color: rgba(0, 0, 0, 0.12);
+
+
+$filler-color-1: #006E75;
+$filler-color-2: #00A17F;
+$filler-color-3: #85D177;
+$filler-color-4: #c9c708;
+$filler-color-5: #534E6A;
+$filler-color-6: #846E90;
+$filler-color-7: #BA91B3;
+$filler-color-8: #F2B5D4;
+$filler-color-9: #00C6B8;
+$filler-color-10: #1E857D;
+$filler-color-11: #81F9C0;
+$filler-color-12: #44C08A;
+$filler-color-13: #008958;
+$filler-color-14: #00A2F0;
+$filler-color-15: #abf4ff;
+$filler-color-16: #48f788;
+$filler-color-17: #9AAEBB;
+$filler-color-18: #986B8B;
+$filler-color-19: #B9A6B3;
+$filler-color-20: #24A9BE;
+$filler-color-21: #38D3C8;
+$filler-color-22: #81F9C0;
+$filler-color-23: #48A194;
+
+$gray-shade-color-1: #294a4c;
+$gray-shade-color-2: #396a5f;
+$gray-shade-color-3: #97b592;
+$gray-shade-color-4: #807f52;
+$gray-shade-color-5: #575463;
+$gray-shade-color-6: #827887;
+$gray-shade-color-7: #b19aad;
+$gray-shade-color-8: #d9ced4;
+$gray-shade-color-9: #46817d;
+$gray-shade-color-10: #3f6461;
+$gray-shade-color-11:#afcbbe;
+$gray-shade-color-12: #729284;
+$gray-shade-color-13: #305a4b;
+$gray-shade-color-14: #54849c;
+$gray-shade-color-15: #3e6d74;
+$gray-shade-color-16: #8fb3ab;
+$gray-shade-color-17: #607d90;
+$gray-shade-color-18: #7b5671;
+$gray-shade-color-19: #8c6e82;
+$gray-shade-color-20: #2d7580;
+$gray-shade-color-21: #2e7671;
+$gray-shade-color-22: #65ae8c;
+$gray-shade-color-23: #42766e;
+
+
+//override bootstrap-grid
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 1024px,
+  lg: 1300px,
+  xl: 1600px
+) !default;
+
+$container-max-widths: (
+  sm: 576px,
+  md: 1024px,
+  lg: 1300px,
+  xl: 1600px
+) !default;

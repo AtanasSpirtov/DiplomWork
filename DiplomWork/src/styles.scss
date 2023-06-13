@@ -1,0 +1,799 @@
+/* You can add global styles to this file, and also import other style files */
+@use "sass:math";
+@import "variables";
+@import "src/mixins";
+@font-face {
+  font-family: GothamPro;
+  src: url(~src/assets/fonts/GothamPro.otf) format("opentype");
+}
+
+@font-face {
+  font-family: GothamPro-Black;
+  src: url(~src/assets/fonts/GothamPro-Black.otf) format("opentype");
+}
+
+@font-face {
+  font-family: GothamPro-Bold;
+  src: url(~src/assets/fonts/GothamPro-Bold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: GothamPro-Light;
+  src: url(~src/assets/fonts/GothamPro-Light.otf) format("opentype");
+}
+
+html, body {
+  height: 100%;
+}
+//.theme-primary {
+//  .costimize-default-black-color {
+//    color: #424250
+//  }
+//}
+
+%common-header-styles{
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+
+  text-transform: uppercase;
+  letter-spacing: -3px;
+  color: $header-title-dark;
+
+  .theme-alternate &{
+    color: $header-title-light;
+  }
+
+
+}
+.main-app .main-app-layout, .main-app.main-app-layout{
+  h1{
+    display: inline-block;
+    font-family: $default-font-family-bold;
+    @extend %common-header-styles;
+
+    &::before{
+      content: "";
+      position: relative;
+      display: block;
+      min-width: 300px;
+      width: 100%;
+      height: 5px;
+      background-color: $primary-color;
+      margin-bottom: 0;
+    }
+
+    &+h2{
+      font-family: $default-font-family-light;
+      margin-top: -16px;
+      @extend %common-header-styles;
+    }
+  }
+}
+
+
+.theme-primary, .theme-alternate{
+  .mat-toolbar.mat-primary{
+    background: linear-gradient(45deg, #4080a0, #224b64, #224b64)!important;
+  }
+}
+
+td {
+  line-break: anywhere;
+}
+
+.pre-line {
+  white-space: pre-line;
+}
+
+a {
+  color: $primary-color;
+  cursor: pointer;
+  text-decoration: none;
+
+  &.exteral-link {
+    color: $accent-color;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+}
+
+input[type=number] {
+  text-align: right;
+}
+
+.action-row {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.left-action-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@import "~bootstrap-4-grid/scss/grid";
+
+.no-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.pull-right {
+  margin-left: auto;
+  float: right;
+}
+
+.checkbox-container {
+  margin-top: 17px;
+  margin-bottom: 15px;
+}
+
+.spacer {
+  margin-top: $gcp-margin;
+}
+
+.filter-params-margin {
+  margin-top: 0.4rem;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.bold-primary-color b {
+  color: $primary-color;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.gcpco-action-button {
+  position: absolute;
+  top: - math.div($gcp-margin,2);
+  right: math.div($gcp-margin,2);
+}
+
+.preserve-new-lines {
+  white-space: pre-wrap;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.hidden-but-taking-space {
+  visibility: hidden;
+}
+
+.rotating {
+  animation: rotation 1.5s infinite linear;
+}
+
+.white-color {
+  color: $background-color-light-theme !important;
+}
+
+.accent-color {
+  color: $accent-color !important;
+}
+
+.error-color {
+  color: $error-color !important;
+}
+
+.warn-color {
+  color: $warning-color !important;
+}
+.grey-color{
+  color: grey !important;
+}
+
+.weak-color {
+  .theme-primary & {
+    color: $weak-text-color-light-theme;
+  }
+
+  .theme-alternate & {
+    color: $weak-text-color-dark-theme
+  }
+
+}
+
+mat-list-item:hover {
+  .theme-primary & {
+    background-color: $lightThemeHoverColor !important;
+    cursor: pointer;
+  }
+}
+
+mat-list-item:hover {
+  .theme-alternate & {
+    background-color: $darkThemeHoverColor !important;
+    cursor: pointer;
+  }
+}
+
+.primary-color {
+  color: $primary-color !important;
+}
+
+.success-color {
+  color: $success !important;
+}
+
+.warning-color {
+  color: $warning-color !important;
+}
+
+.mat-toolbar {
+  height: 100px !important;
+}
+
+.mat-toolbar-row {
+  height: 80px !important;
+}
+
+.toggle-container {
+  margin-top: 12px;
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
+
+.auto-margin {
+  margin: 0 auto;
+}
+
+.margin-0 {
+  margin: 0 !important;
+}
+
+.right-aligned-cell {
+  text-align: right !important;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+
+  .extra-large-column {
+    width: 250px !important;
+  }
+
+  .large-column {
+    width: 175px !important;
+  }
+
+  .medium-column {
+    width: 100px !important;
+  }
+
+  .small-column {
+    width: 50px !important;
+  }
+
+  tr {
+    .table-action-buttons {
+      visibility: hidden;
+    }
+
+    &:hover .table-action-buttons {
+      visibility: visible;
+    }
+  }
+
+  td.mat-cell, th.mat-header-cell {
+    padding-right: $gcp-margin;
+  }
+
+  .detail-row {
+    height: 0 !important;
+  }
+
+  .expanded-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+}
+
+.badge-checkbox {
+  .mat-badge-content {
+    top: -20px !important;
+    right: -20px !important;
+    font-weight: 500;
+    font-size: 11px;
+    width: 26px !important;
+    height: 26px !important;
+    line-height: 26px !important;
+  }
+}
+
+.full-width {
+  width: 100%;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+.line-break-auto{
+  line-break: auto !important;
+}
+
+//.costimize-chips {
+//  display: flex;
+//  flex-wrap: wrap;
+//
+//  .mat-chip {
+//    white-space: nowrap;
+//    text-overflow: ellipsis;
+//    max-width: 200px;
+//    overflow: hidden;
+//    display: inline-block;
+//
+//    @media(max-width: map-get($grid-breakpoints, "xl")) {
+//      max-width: 160px;
+//    }
+//    @media(max-width: map-get($grid-breakpoints, "lg")) {
+//      max-width: 140px;
+//    }
+//  }
+//
+//  mat-chip {
+//    padding: 7px 8px;
+//  }
+//
+//  mat-chip-list {
+//    margin: 4px;
+//  }
+//}
+
+.row-with-right-space {
+  margin-right: 15px;
+
+  .protruding-button {
+    display: flex;
+    align-self: center;
+    position: absolute;
+    right: 0;
+  }
+
+}
+
+.retain-height {
+  height: 100%;
+
+  &.bottom-spaced-card {
+    height: calc(100% - 20px);
+  }
+}
+
+.bottom-spaced-card {
+  margin-bottom: $gcp-margin;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+//.costimize-material-icon {
+//  color: $primary-color;
+//  cursor: default;
+//
+//  &.bottom-aligned {
+//    vertical-align: bottom;
+//  }
+//
+//  &.left-margin {
+//    margin-left: 5px;
+//  }
+//
+//
+//  &.right-margin {
+//    margin-right: 5px;
+//  }
+//
+//  &.error-icon {
+//    color: $error-color !important;
+//  }
+//
+//  &.warn-icon {
+//    color: $warning-color !important;
+//  }
+//
+//  &.success-icon {
+//    color: $success !important;
+//  }
+//
+//  &.actions-icon {
+//    color: 	#f2f21f !important;
+//  }
+//
+//  &.help-material-icon-header {
+//    font-size: 15px;
+//  }
+//
+//  &.info-material-icon-header {
+//    font-size: 18px;
+//  }
+//}
+
+//.costimize-material-icon-accent {
+//  color: $accent-color !important;
+//}
+
+
+.help-material-icon {
+  font-size: 18px;
+  cursor: default;
+}
+
+.spinner-around-checkbox-parent {
+  position: relative;
+}
+
+.spinner-around-checkbox {
+  position: absolute !important;
+  top: -6px;
+  left: -8px;
+}
+
+.side-documentation {
+  width: 20%;
+  min-width: 250px;
+  position: absolute;
+  right: 0;
+  z-index: 3;
+  @include app-conent-margin-top;
+}
+
+.mat-drawer-inner-container {
+  width: 300px !important;
+  padding: $gcp-margin
+}
+
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  list-style-type: none;
+
+  mat-icon {
+    color: $primary-color;
+  }
+
+  &:hover > a mat-icon {
+    color: darken($accent-color, 10%);
+  }
+
+  &.current-menu-entry mat-icon {
+    color: $accent-color;
+  }
+}
+
+.small-icon {
+  font-size: 0.8rem;
+  margin-right: 5px;
+}
+
+.text-size-icon {
+  font-size: 1rem !important;
+  height: 1rem !important;
+  width: 2rem !important;
+  margin-top: -0.5rem !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.button-group {
+  button {
+    margin: 0 $gcp-margin 0 0;
+  }
+
+}
+
+.mat-card.overview-card > .mat-card-actions:last-child {
+  position: absolute;
+  bottom: 8px;
+}
+
+.breakable-text {
+  word-break: break-word;
+}
+
+.top-aligned {
+  vertical-align: top;
+}
+
+.bottom-aligned {
+  vertical-align: bottom;
+}
+
+.float-right {
+  float: right;
+}
+
+
+.delete-button {
+  background-color: $error-color !important;
+  color: white !important;
+}
+
+mat-card {
+  margin-bottom: 1px;
+}
+
+.hide-button .mat-icon-button {
+  display: none !important;
+}
+
+.mat-dialog-container {
+  min-width: 700px;
+}
+
+.script-creation-style {
+  word-wrap: break-word;
+  max-width: 70vw;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace !important
+}
+
+.terminal-card {
+  min-height: 50px;
+  background-color: $terminal-bg-color !important;
+  color: $background-color-light-theme !important;
+}
+
+.msp-terminal-card{
+  min-height: 50px;
+  background-color: #510313 !important;
+  color: $background-color-light-theme !important;
+}
+
+.terminal-style{
+  word-wrap: break-word;
+  max-width: 70vw;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace !important;
+  white-space: pre-wrap;
+}
+
+.script-creation-copy {
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  right: $gcp-margin;
+}
+
+.bold-text {
+  font-weight: 500;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.datepicker .mat-calendar-period-button {
+  pointer-events: none;
+}
+
+.datepicker .mat-calendar-arrow {
+  display: none;
+}
+
+.overview-highlighted-text {
+  font-size: 3.5rem;
+  font-weight: 800;
+  justify-content: center;
+}
+
+.overview-chart-min-width {
+  min-width: 250px;
+}
+
+.menu-divider {
+  $line-padding: 4px;
+  user-select: none;
+  padding: 0 math.div($line-padding,2) 0 $line-padding;
+  margin-left: 16 + $line-padding;
+  font-weight: 100;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+
+  .theme-primary & {
+    background: $background-color-light-theme;
+  }
+
+  .theme-alternate & {
+    background: $background-color-dark-theme;
+  }
+}
+
+.theme-background {
+  .theme-primary & {
+    background-color: $background-color-light-theme;
+  }
+
+  .theme-alternate & {
+    background-color: $background-color-dark-theme;
+  }
+}
+
+.code {
+  padding: 0 math.div($gcp-margin,2);
+  border: 1px solid $border-color;
+  border-radius: 4px;
+}
+
+.card-bottom-actions {
+  &.mat-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mat-card-header {
+    flex-shrink: 0;
+  }
+
+  .mat-card-content {
+    flex-grow: 1;
+    overflow: auto;
+  }
+}
+
+.huge-icon {
+  font-size: 128px !important;
+}
+
+.medium-icon {
+  font-size: 100px !important;
+}
+
+
+ngx-skeleton-loader .loader {
+  margin-bottom: 0 !important;
+}
+
+.no-selection {
+  @include no-selection;
+}
+
+// always include only once per project
+@include mat-core();
+
+// Theme Init
+.theme-primary {
+  @include angular-material-theme($theme);
+}
+
+.theme-alternate {
+  @include angular-material-color($altTheme);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.error-label-selected {
+  margin: 0px !important;
+}
+
+.tooltip-control {
+  display: inline-block !important;
+  width: calc(100% - 25px) !important;
+}
+
+.control-info {
+  vertical-align: bottom;
+  padding-bottom: 15px;
+}
+.checkbox-tooltip{
+  vertical-align: bottom;
+  padding-bottom: 20px;
+}
+
+.theme-alternate ngx-skeleton-loader .loader {
+  background-color: #2c2c2c !important;
+}
+
+.mat-button-toggle-checked .mat-button-toggle-focus-overlay {
+  display: none;
+}
+
+
+button span .mat-progress-spinner svg circle{
+  stroke: white !important;
+}
+
+.selectable {
+  cursor: pointer;
+
+  &.selected-card {
+    background-color: $selected-bg;
+  }
+}
+.clickable-text{
+  cursor: pointer;
+  color: $primary-color;
+}
+
+.fixed-height-one-line{
+  min-height: 2.5rem;
+}
+
+.min-h-100 {
+  min-height: 100%;
+}
+
+.bottom-spaced-mat-title {
+  margin-bottom: $gcp-margin !important;
+}
+
+.dropdown-height {
+  height: 58px;
+}
+
+.big-text {
+  font-size: 12rem;
+}
+.padding-50 {
+  padding-top: 5rem;
+}
+
+.warning-container {
+  margin: auto;
+  padding: 10px;
+  background-color: $warning-color;
+  border-radius: 4px;
+  font-size: medium;
+}
+
+.scrollable-container{
+  overflow-x: auto;
+}
+.long-child{
+  min-width: 2500px;
+}
+
+.table-with-expandable-rows {
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .container-fluid {
+    padding: 0;
+  }
+
+  tr.example-detail-row {
+    height: 0;
+  }
+
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
+}

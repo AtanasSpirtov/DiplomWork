@@ -1,0 +1,13 @@
+@import 'src/variables';
+
+@mixin no-selection {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin app-conent-margin-top {
+  margin-top: -1*$gcp-margin;
+}
+
