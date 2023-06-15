@@ -15,13 +15,18 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {SignUpUserComponent} from "../pages/sign-up-user/sign-up-user.component";
+import {SignUpBusinessComponent} from "../pages/sign-up-business/sign-up-business.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuPageComponent,
-    LoginComponent
+    LoginComponent,
+    SignUpUserComponent,
+    SignUpBusinessComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatIconModule,
     MatListModule,
     MatInputModule,
-    MatToolbarModule
+    MatToolbarModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

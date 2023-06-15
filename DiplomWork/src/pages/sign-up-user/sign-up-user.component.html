@@ -1,0 +1,64 @@
+<app-menu-page></app-menu-page>
+
+<div class="col-12">
+  <div class="container">
+    <mat-card class="full-width">
+      <mat-card-title class="centered-text">Sign up</mat-card-title>
+      <mat-card-content>
+        <form>
+          <div class="row pad">
+            <mat-form-field>
+              <mat-label>Enter your username:</mat-label>
+              <input type="text" matInput [formControl]="usernameFormControl">
+            </mat-form-field>
+            <mat-error *ngIf="usernameFormControl.hasError('required')">
+              Username is required
+            </mat-error>
+          </div>
+          <div class="row pad">
+            <mat-form-field>
+              <mat-label>Enter your Password:</mat-label>
+              <input type="password" matInput [formControl]="passwordFormControl">
+            </mat-form-field>
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+              Username is required
+            </mat-error>
+          </div>
+          <div class="row pad">
+            <mat-form-field>
+              <mat-label>Enter your Email:</mat-label>
+              <input matInput type="email" [formControl]="emailFormControl">
+            </mat-form-field>
+            <mat-error *ngIf="emailFormControl.hasError('email')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is required
+            </mat-error>
+          </div>
+          <div class="row pad">
+            <mat-form-field>
+              <mat-label>Enter your phone number:</mat-label>
+              <input matInput [formControl]="phoneFormControl">
+            </mat-form-field>
+            <mat-error *ngIf="phoneFormControl.hasError('pattern')">
+              Incorrect phone pattern
+            </mat-error>
+            <mat-error *ngIf="phoneFormControl.hasError('required')">
+              Phone is required
+            </mat-error>
+          </div>
+        </form>
+        <div class="centered-text">
+          <span class="message-text">Navigate to </span>
+          <a (click)="navigateToLogin()" class="primary-color">Login</a>
+        </div>
+        <div class="row pad centered-text">
+          <div class="col-12">
+            <button mat-raised-button color="warn">Sign Up</button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

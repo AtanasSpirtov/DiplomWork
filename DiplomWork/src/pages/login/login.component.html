@@ -15,16 +15,21 @@
           <div class="row pad">
             <mat-form-field>
               <mat-label>Password:</mat-label>
-              <input type="text" matInput>
+              <input type="password" matInput>
             </mat-form-field>
           </div>
         </form>
-        <div class="row pad">
-          <button mat-raised-button color="warn">Login</button>
+        <div class="row pad centered-text">
+          <div class="col-12">
+            <button mat-raised-button color="warn">Login</button>
+          </div>
         </div>
         <div class="centered-text">
           <span class="message-text">Don't have an account? </span>
-          <a (click)="navigateToSignUp()" class="primary-color">Sign Up</a>
+          <div class="spacer"></div>
+          <a (click)="navigateToSignUpUser()" class="primary-color">Sign Up as user</a>
+          <div class="spacer"></div>
+          <a (click)="navigateToSignUpBusiness()" class="primary-color">Sign Up as business</a>
         </div>
       </mat-card-content>
     </mat-card>
