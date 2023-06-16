@@ -12,12 +12,14 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {SignUpUserComponent} from "../pages/sign-up-user/sign-up-user.component";
 import {SignUpBusinessComponent} from "../pages/sign-up-business/sign-up-business.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {BasicHttpInterceptorService} from "../pages/basic-http-interceptor.service";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -41,9 +43,12 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatListModule,
     MatInputModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, useClass: BasicHttpInterceptorService, multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
