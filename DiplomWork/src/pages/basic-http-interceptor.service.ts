@@ -27,7 +27,6 @@ export class BasicHttpInterceptorService implements HttpInterceptor {
     })
     return next.handle(req).pipe(
       map((event: HttpEvent<any>) => {
-        console.log(event)
         if (event instanceof HttpResponse) {
           if (event.url != null && event.headers != null && event.headers.has('Authorization') && event.url.includes("/login")) {
             let token = event.headers.get('Authorization');

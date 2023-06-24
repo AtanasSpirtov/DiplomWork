@@ -3,6 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "../pages/login/login.component";
 import {SignUpUserComponent} from "../pages/sign-up-user/sign-up-user.component";
 import {SignUpBusinessComponent} from "../pages/sign-up-business/sign-up-business.component";
+import {UserHomePageComponent} from "../pages/user-home-page/user-home-page.component";
+import {BusinessHomePageComponent} from "../pages/business-home-page/business-home-page.component";
+import {CreateBusinessComponent} from "../pages/create-business/create-business.component";
 
 const routes: Routes = [
   {
@@ -21,6 +24,15 @@ const routes: Routes = [
         path: 'business', component: SignUpBusinessComponent
       }
     ]
+  },
+  {
+    path: 'user-home', component: UserHomePageComponent
+  },
+  {
+    path: 'business-home', component: BusinessHomePageComponent
+  },
+  {
+    path: 'create-business', component: CreateBusinessComponent
   },
 ];
 

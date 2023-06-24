@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {LoggedUser, LoggedUserWithRoleUser, User} from "../model/User";
+import {LoggedUser} from "../model/User";
 import {Message} from "../model/Message";
 import {Options} from "../model/Options";
+import {LoginResponse} from "../pages/login/login.component";
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,14 @@ export class UserService {
 
   private readonly apiUrl = 'http://localhost:8080';
 
-  login(username: string, password: string): Observable<string> {
-    let user = new LoggedUser(username, password)
+  login(username: string, password: string): Observable<LoginResponse> {
+    window.localStorage.clear()
+    let user = new LoggedUser(username, password, null, null, null, null)
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'User-Information': JSON.stringify(user)
     })
-    return this.http.get<string>(`${this.apiUrl}/login`, {headers})
+    return this.http.get<LoginResponse>(`${this.apiUrl}/login`, {headers})
   }
 
   logout() {
@@ -30,7 +32,7 @@ export class UserService {
   }
 
   signUp(user: LoggedUser) {
-    const JSONObject = JSON.stringify(user);
-    return this.http.post<Message>(`${this.apiUrl}/user/create`, JSONObject, Options.options);
+    console.log(user)
+    return this.http.post<Message>(`${this.apiUrl}/user/create`, user);
   }
 }

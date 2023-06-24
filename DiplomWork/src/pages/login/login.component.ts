@@ -14,15 +14,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   loginForm(username: string, password: string) {
-    if (window.localStorage.getItem("token") != null) {
-      window.localStorage.clear()
-    }
     this.userService.login(username, password)
       .subscribe(
-        () => {
-          let successfulUrl = '/successfulLoggedIn';
+        userDefaultInformation => {
+          let homePage : string;
+          console.log(userDefaultInformation.authorities[0] == "regularUser");
+          if(userDefaultInformation.authorities[0] == "regularUser"){
+            homePage = 'user-home'
+          } else homePage = 'business-home'
           this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-            this.router.navigate([successfulUrl]);
+            this.router.navigate([homePage]);
           });
         })
 
@@ -33,5 +34,16 @@ export class LoginComponent implements OnInit {
 
   navigateToSignUpBusiness() {
     this.router.navigate(["signUp", "business"])
+  }
+}
+
+export class LoginResponse {
+  username: string
+  authorities: string[]
+
+
+  constructor(username: string, authorities: string[]) {
+    this.username = username;
+    this.authorities = authorities;
   }
 }

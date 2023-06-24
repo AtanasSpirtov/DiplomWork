@@ -20,6 +20,12 @@ import {SignUpBusinessComponent} from "../pages/sign-up-business/sign-up-busines
 import {ReactiveFormsModule} from "@angular/forms";
 import {BasicHttpInterceptorService} from "../pages/basic-http-interceptor.service";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {MatSelectModule} from '@angular/material/select';
+import {UserHomePageComponent} from "../pages/user-home-page/user-home-page.component";
+import {BusinessHomePageComponent} from "../pages/business-home-page/business-home-page.component";
+import {MatTableModule} from '@angular/material/table';
+import {CreateBusinessComponent} from "../pages/create-business/create-business.component";
+import {DatePipe} from "@angular/common";
 
 
 @NgModule({
@@ -28,7 +34,10 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
     MenuPageComponent,
     LoginComponent,
     SignUpUserComponent,
-    SignUpBusinessComponent
+    SignUpBusinessComponent,
+    UserHomePageComponent,
+    BusinessHomePageComponent,
+    CreateBusinessComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,10 +54,12 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
     MatToolbarModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatSelectModule,
+    MatTableModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: BasicHttpInterceptorService, multi: true
-  }],
+  },DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

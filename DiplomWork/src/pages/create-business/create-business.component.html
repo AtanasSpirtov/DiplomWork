@@ -1,0 +1,113 @@
+<app-menu-page></app-menu-page>
+<div class="main-app main-app-layout pad">
+  <h1>Create Business</h1>
+  <div class="spacer"></div>
+  <mat-card>
+    <form [formGroup]="createBusinessForm" autocomplete="off">
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+            <div class="col-12 full-width">
+              <mat-form-field>
+                <mat-label>Rule Name</mat-label>
+                <input matInput formControlName="name">
+                <mat-error *ngIf="createBusinessForm.get('name').hasError('required')">
+                  Name is required!
+                </mat-error>
+                <mat-error *ngIf="createBusinessForm.get('name').hasError('maxLength')">
+                  Name max length is 100!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 full-width">
+              <mat-form-field>
+                <mat-label>Location</mat-label>
+                <input matInput formControlName="location">
+                <mat-error *ngIf="createBusinessForm.get('location').hasError('required')">
+                  Location is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 full-width">
+              <mat-form-field>
+                <mat-label>Telephone</mat-label>
+                <input matInput formControlName="telephone">
+                <mat-error *ngIf="createBusinessForm.get('telephone').hasError('required')">
+                  Telephone is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 full-width">
+              <form enctype="multipart/form-data">
+                <mat-label>Select Picture</mat-label>
+                <input type="file" (change)="onFileSelected($event)">
+              </form>
+            </div>
+            <div class="col-12 full-width">
+              <mat-form-field>
+                <mat-label>Business field</mat-label>
+                <input matInput formControlName="businessField">
+                <mat-error *ngIf="createBusinessForm.get('businessField').hasError('required')">
+                  Business field is required!
+                </mat-error>
+                <mat-error *ngIf="createBusinessForm.get('name').hasError('maxLength')">
+                  Business field max length is 100!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 full-width">
+              <mat-form-field>
+                <mat-label>Start time</mat-label>
+                <input matInput formControlName="startTime">
+                <mat-error *ngIf="createBusinessForm.get('startTime').hasError('required')">
+                  Start time is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 full-width">
+              <mat-form-field>
+                <mat-label>End time</mat-label>
+                <input matInput formControlName="endTime">
+                <mat-error *ngIf="createBusinessForm.get('endTime').hasError('required')">
+                  End time is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 full-width">
+              <mat-form-field>
+                <mat-label>Number of slots</mat-label>
+                <input matInput formControlName="numberOfSlots">
+                <mat-error *ngIf="createBusinessForm.get('numberOfSlots').hasError('required')">
+                  Number of slots is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12 full-width">
+              <mat-card-subtitle *ngIf="
+              generateSlotsByGivenData(1,1,1, false).length != 0">
+                Slots
+              </mat-card-subtitle>
+                <p>{{generateSlotsByGivenData(
+                  this.createBusinessForm.get('startTime').value,
+                  this.createBusinessForm.get('endTime').value,
+                  this.createBusinessForm.get('numberOfSlots').value,
+                  true
+                )}}</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="row no-gutters">
+          <div class="col-12">
+            <div class="pull-right spacer vertical-align">
+              <button mat-raised-button (click)="goToListBusiness()">
+                Cancel
+              </button>
+              <button mat-raised-button color="warn" (click)="saveBusiness()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UserService} from "../../service/user.service";
-import {LoggedUserWithRoleUser} from "../../model/User";
+import {LoggedUser} from "../../model/User";
 
 @Component({
   selector: 'app-sign-up-user',
@@ -17,24 +17,30 @@ export class SignUpUserComponent implements OnInit {
 
   phoneFormControl = new FormControl('', [Validators.required, Validators.pattern("[0-9 ]{10,15}")])
 
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) {
+  }
 
   ngOnInit(): void {
   }
+
   createUser() {
     if (this.usernameFormControl.valid && this.passwordFormControl.valid && this.emailFormControl.valid && this.phoneFormControl.valid) {
-      let user = new LoggedUserWithRoleUser(
+      let user = new LoggedUser(
         this.usernameFormControl.value,
         this.passwordFormControl.value,
         this.emailFormControl.value,
-        this.phoneFormControl.value)
+        this.phoneFormControl.value,
+        false,
+        null
+      )
 
 
       this.userService.signUp(user)
         .subscribe(() =>
-        this.router.navigate(['/login']));
+          this.router.navigate(['/login']));
     }
   }
+
   navigateToLogin() {
     this.router.navigate(["login"])
 

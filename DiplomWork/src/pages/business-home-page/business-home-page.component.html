@@ -1,0 +1,79 @@
+<app-menu-page></app-menu-page>
+<div class="main-app main-app-layout pad">
+  <h1>Business</h1>
+  <h2>Overview</h2>
+  <div class="spacer"></div>
+  <mat-card>
+    <div class="gcpco-action-button">
+      <button mat-mini-fab color="accent" (click)="goToCreateBusiness()">
+        <em class="material-icons" [ngStyle]="{'color':'white'}">add</em>
+      </button>
+    </div>
+    <table mat-table [dataSource]="allBusinesses">
+      <ng-container matColumnDef="PICTURE" class="picture-size">
+        <th mat-header-cell *matHeaderCellDef>Picture</th>
+        <td mat-cell *matCellDef="let business">
+          <img [src]="getImage(business.picture)" alt="Image" class="full-width">
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="NAME">
+        <th mat-header-cell *matHeaderCellDef >Name</th>
+        <td mat-cell *matCellDef="let business">
+          {{business.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="LOCATION">
+        <th mat-header-cell *matHeaderCellDef>Location</th>
+        <td mat-cell *matCellDef="let business">
+          {{business.location}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="TELEPHONE">
+        <th mat-header-cell *matHeaderCellDef>Location</th>
+        <td mat-cell *matCellDef="let business">
+          {{business.telephone}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="BUSINESS_FIELD">
+        <th mat-header-cell *matHeaderCellDef>Business field</th>
+        <td mat-cell *matCellDef="let business">
+          {{business.businessField}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="START_TIME">
+        <th mat-header-cell *matHeaderCellDef>Start time</th>
+        <td mat-cell *matCellDef="let business">
+          {{business.startTime}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="END_TIME">
+        <th mat-header-cell *matHeaderCellDef>End time</th>
+        <td mat-cell *matCellDef="let business">
+          {{business.endTime}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="ACTION">
+        <th mat-header-cell *matHeaderCellDef class="large-column" scope="col">Actions</th>
+        <td mat-cell *matCellDef="let business">
+          <em class="material-icons  mat-icon-button costimize-material-icon mat-primary"
+              (click)="viewBusiness(business.id)">visibility</em>
+          <em class="material-icons  mat-icon-button costimize-material-icon mat-primary"
+              (click)="editBusiness(business.id)">mode_edit</em>
+          <em class="material-icons  mat-icon-button costimize-material-icon mat-primary"
+              (click)="deleteBusiness(business.id)">delete</em>
+<!--          <i *ngIf="kpi.properties.requiredProjectsWithoutAccess.length>0"-->
+<!--             class="material-icons costimize-material-icon warn-color"-->
+<!--             matTooltip="This KPI was defined for projects {{getProjectsWithoutAccess(kpi)}} that are currently not in the scope of this service account."-->
+<!--             matTooltipPosition="right">warning</i>-->
+        </td>
+
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+  </mat-card>
+</div>
