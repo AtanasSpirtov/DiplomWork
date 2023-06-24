@@ -6,6 +6,7 @@ import {SignUpBusinessComponent} from "../pages/sign-up-business/sign-up-busines
 import {UserHomePageComponent} from "../pages/user-home-page/user-home-page.component";
 import {BusinessHomePageComponent} from "../pages/business-home-page/business-home-page.component";
 import {CreateBusinessComponent} from "../pages/create-business/create-business.component";
+import {ViewBusinessComponent} from "../pages/view-business/view-business.component";
 
 const routes: Routes = [
   {
@@ -33,6 +34,9 @@ const routes: Routes = [
   },
   {
     path: 'create-business', component: CreateBusinessComponent
+  },
+  {
+    path: 'view-business', component: ViewBusinessComponent
   },
 ];
 

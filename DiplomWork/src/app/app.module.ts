@@ -26,6 +26,10 @@ import {BusinessHomePageComponent} from "../pages/business-home-page/business-ho
 import {MatTableModule} from '@angular/material/table';
 import {CreateBusinessComponent} from "../pages/create-business/create-business.component";
 import {DatePipe} from "@angular/common";
+import {ViewBusinessComponent} from "../pages/view-business/view-business.component";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {ConfirmationModalComponent} from "../pages/dialogs/confirmation-modal.components";
 
 
 @NgModule({
@@ -38,6 +42,8 @@ import {DatePipe} from "@angular/common";
     UserHomePageComponent,
     BusinessHomePageComponent,
     CreateBusinessComponent,
+    ViewBusinessComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +62,8 @@ import {DatePipe} from "@angular/common";
     HttpClientModule,
     MatSelectModule,
     MatTableModule,
+    MatTooltipModule,
+    MatDialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: BasicHttpInterceptorService, multi: true

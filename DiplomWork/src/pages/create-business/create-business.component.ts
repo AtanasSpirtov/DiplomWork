@@ -17,12 +17,13 @@ export class CreateBusinessComponent implements OnInit {
     this.createBusinessForm = new FormGroup({
         name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
         location: new FormControl('', [Validators.required]),
-        telephone: new FormControl('', [Validators.required]),
-        picture: new FormControl(''),
+        telephone: new FormControl('', [Validators.required, Validators.pattern("[0-9 ]{10,15}")]),
+        picture: new FormControl('', Validators.required),
         businessField: new FormControl('', [Validators.required, Validators.maxLength(100)]),
         startTime: new FormControl('', [Validators.required]),
         endTime: new FormControl('', [Validators.required]),
-        numberOfSlots: new FormControl(1, [Validators.required])
+        numberOfSlots: new FormControl(1, [Validators.required]),
+        maxUsers: new FormControl(1, [Validators.required, Validators.min(1)])
       }
     )
   }
@@ -41,7 +42,7 @@ export class CreateBusinessComponent implements OnInit {
       const base64String: string = reader.result as string;
       const base64Data: string = base64String.split(',')[1]; // Remove the MIME type part
       this.createBusinessForm.get('picture')?.setValue(base64Data);
-      console.log(this.createBusinessForm.get('picture').value);    };
+    };
     reader.readAsDataURL(file);
   }
 
@@ -51,12 +52,16 @@ export class CreateBusinessComponent implements OnInit {
 
   saveBusiness() {
     if (this.createBusinessForm.valid) {
-      let startTime = this.createBusinessForm.get('startTime').value
-      let endTime = this.createBusinessForm.get('endTime').value
+      let startTime = (this.createBusinessForm.get('startTime').value as string)
+      let startTimeSplit = startTime.split(":")
+      let endTime = (this.createBusinessForm.get('endTime').value as string)
+      let endTimeSplit = endTime.split(":")
       let startDate = new Date()
-      startDate.setHours(startTime)
+      startDate.setHours(Number(startTimeSplit[0]))
+      startDate.setMinutes(Number(startTimeSplit[1]))
       let endDate = new Date()
-      endDate.setHours(endTime)
+      endDate.setHours(Number(endTimeSplit[0]))
+      endDate.setMinutes(Number(endTimeSplit[1]))
       let business = new Business(
         this.createBusinessForm.get('name').value,
         this.createBusinessForm.get('location').value,
@@ -66,27 +71,42 @@ export class CreateBusinessComponent implements OnInit {
         this.datePipe.transform(startDate, 'yyyy-MM-dd\'T\'HH:mm:ss.SSS'),
         this.datePipe.transform(endDate, 'yyyy-MM-dd\'T\'HH:mm:ss.SSS'),
         this.generateSlotsByGivenData(
-          Number(startTime),
-          Number(endTime),
-          this.createBusinessForm.get('numberOfSlots').value, false),
+          startTime,
+          endTime,
+          this.createBusinessForm.get('numberOfSlots').value,
+          false,
+          this.createBusinessForm.get('maxUsers').value
+        ),
       )
-      this.businessService.saveBusiness(business).subscribe()
+      this.businessService.saveBusiness(business).subscribe(response =>
+        this.router.navigate(['business-home']))
     }
   }
 
-  generateSlotsByGivenData(startHour: number, endHour: number, numberOfSplits: number, forOverview: boolean): any {
+  convertToMinutes(time) {
+    let timeParts = time.split(":");
+    let hours = parseInt(timeParts[0]);
+    let minutes = parseInt(timeParts[1]);
+
+    return hours * 60 + minutes;
+  }
+
+  generateSlotsByGivenData(startTime: string, endTime: string, numberOfSplits: number, forOverview: boolean, maxUsers: number): any {
     let splits: Slot[] = [];
     if (
       !this.createBusinessForm.get('startTime').hasError('required') &&
       !this.createBusinessForm.get('endTime').hasError('required') &&
       !this.createBusinessForm.get('numberOfSlots').hasError('required')
     ) {
-      const totalHours = endHour - startHour;
+      let startMinutes = this.convertToMinutes(startTime);
+      let endMinutes = this.convertToMinutes(endTime);
+
+      const totalHours = Number((endMinutes - startMinutes) / 60);
       const splitSize = totalHours / numberOfSplits;
       for (let i = 0; i < numberOfSplits; i++) {
-        const start = startHour + i * splitSize;
-        const end = startHour + (i + 1) * splitSize;
-        splits.push(new Slot(this.convertToHourFormat(start), this.convertToHourFormat(end), []));
+        const start = startMinutes / 60 + i * splitSize;
+        const end = startMinutes / 60 + (i + 1) * splitSize;
+        splits.push(new Slot(this.convertToHourFormat(Number(start)), this.convertToHourFormat(Number(end)), [], maxUsers));
       }
       return (forOverview) ? splits.map(split => `${split.slotStartTime}h - ${split.slotEndTime}h `) : splits;
     }

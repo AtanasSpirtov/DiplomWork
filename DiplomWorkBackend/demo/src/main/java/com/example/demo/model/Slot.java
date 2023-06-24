@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.util.List;
 
 @Entity
 public class Slot extends _BaseEntity{
-    @NotNull
+    @org.jetbrains.annotations.NotNull
     private String slotStartTime;
 
     @NotNull
@@ -20,6 +21,10 @@ public class Slot extends _BaseEntity{
             joinColumns = @JoinColumn(name = "slot_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )    private List<User> allUsers;
+
+    @NotNull
+    @Column(columnDefinition = "NUMERIC DEFAULT 1")
+    private Integer maxUsers;
 
     public String getSlotStartTime() {
         return slotStartTime;
@@ -43,5 +48,13 @@ public class Slot extends _BaseEntity{
 
     public void setAllUsers(List<User> allUsersInSlot) {
         this.allUsers = allUsersInSlot;
+    }
+
+    public Integer getMaxUsers() {
+        return maxUsers;
+    }
+
+    public void setMaxUsers(Integer maxUsers) {
+        this.maxUsers = maxUsers;
     }
 }

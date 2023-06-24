@@ -35,7 +35,12 @@ public class BusinessController extends _BaseController {
         businessService.editBusiness(business);
         return ResponseEntity.ok(new MessageDTO("Successfully edited"));
     }
-
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<MessageDTO> editBusiness(@PathVariable("id") Long id) {
+        logger.info("Deleting business with id {}", id);
+        businessService.deleteBusiness(id);
+        return ResponseEntity.ok(new MessageDTO("Successfully deleted"));
+    }
     @PostMapping("/remove-user")
     public ResponseEntity<MessageDTO> removeUserFromBusiness(@RequestParam Long businessId, @RequestParam Long slotId, @RequestParam Long userId) {
         logger.info("Removing user with id {} from business with id {} from slot with id {}", userId, businessId, slotId);

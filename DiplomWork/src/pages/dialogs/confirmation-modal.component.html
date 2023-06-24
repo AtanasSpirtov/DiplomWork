@@ -1,0 +1,15 @@
+<h3 class="bold-text">{{data.title}}</h3>
+<div mat-dialog-content class="pre-line">
+  <p>{{data.message}}</p>
+  <ng-container *ngIf="data.resources">
+    <ul>
+      <li *ngFor="let resource of data.resources">{{ resource }}</li>
+    </ul>
+  </ng-container>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button (click)="close()">{{data.cancelText ? data.cancelText : "Cancel"}}</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true"
+          #btnFocus=matButton [autofocus]="btnFocus.focus()">{{data.confirmText ? data.confirmText : "Confirm"}}
+  </button>
+</div>

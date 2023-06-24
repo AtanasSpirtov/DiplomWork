@@ -23,4 +23,8 @@ export class BusinessService {
   saveBusiness(business: Business): Observable<Message> {
     return this.http.post<Message>(`${this.apiUrl}/business/save`, business)
   }
+
+  deleteBusinessById(id: number): Observable<Message> {
+    return this.http.delete<Message>(`${this.apiUrl}/business/delete/${id}`)
+  }
 }

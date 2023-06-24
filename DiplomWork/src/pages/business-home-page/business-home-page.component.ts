@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Business} from "../../model/Business";
 import {Router} from "@angular/router";
 import {BusinessService} from "../../service/business.service";
+import {take} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmationModalComponent} from "../dialogs/confirmation-modal.components";
 
 @Component({
   selector: 'app-business-home-page',
@@ -13,7 +16,9 @@ export class BusinessHomePageComponent implements OnInit {
   allBusinesses: Business[] = []
   displayedColumns = ['PICTURE', 'NAME', 'LOCATION', 'TELEPHONE', 'BUSINESS_FIELD', 'START_TIME', 'END_TIME', 'ACTION'];
 
-  constructor(private router: Router, private businessService: BusinessService) {
+  constructor(private router: Router,
+              private businessService: BusinessService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -30,7 +35,8 @@ export class BusinessHomePageComponent implements OnInit {
   }
 
   viewBusiness(id: number) {
-
+    let currentBusiness = this.allBusinesses.find(business => business.id == id)
+    this.router.navigate(['view-business', {business: JSON.stringify(currentBusiness)}])
   }
 
   editBusiness(id: number) {
@@ -38,5 +44,20 @@ export class BusinessHomePageComponent implements OnInit {
   }
 
   deleteBusiness(id: number) {
+    this.dialog.open(ConfirmationModalComponent, {
+      data: {
+        title: 'Delete Business?',
+        message: 'Are you sure you want to delete this business. All slots and assigned users will be removed'
+      }
+    }).afterClosed()
+      .pipe(take(1))
+      .subscribe(confirmed => {
+        if (confirmed) {
+          this.businessService.deleteBusinessById(id).subscribe( _ =>
+            this.businessService.getAllBusinesses()
+              .subscribe(businesses => this.allBusinesses = businesses)
+          )
+        }
+      });
   }
 }
