@@ -30,6 +30,9 @@ import {ViewBusinessComponent} from "../pages/view-business/view-business.compon
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {ConfirmationModalComponent} from "../pages/dialogs/confirmation-modal.components";
+import {AddUserToSlotComponent} from "../pages/add-user-to-slot/add-user-to-slot.component";
+import {MyProfileComponent} from "../pages/my-profile/my-profile.component";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -43,7 +46,9 @@ import {ConfirmationModalComponent} from "../pages/dialogs/confirmation-modal.co
     BusinessHomePageComponent,
     CreateBusinessComponent,
     ViewBusinessComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    AddUserToSlotComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +68,8 @@ import {ConfirmationModalComponent} from "../pages/dialogs/confirmation-modal.co
     MatSelectModule,
     MatTableModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: BasicHttpInterceptorService, multi: true

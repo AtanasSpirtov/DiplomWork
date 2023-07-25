@@ -7,6 +7,8 @@ import {UserHomePageComponent} from "../pages/user-home-page/user-home-page.comp
 import {BusinessHomePageComponent} from "../pages/business-home-page/business-home-page.component";
 import {CreateBusinessComponent} from "../pages/create-business/create-business.component";
 import {ViewBusinessComponent} from "../pages/view-business/view-business.component";
+import {AddUserToSlotComponent} from "../pages/add-user-to-slot/add-user-to-slot.component";
+import {MyProfileComponent} from "../pages/my-profile/my-profile.component";
 
 const routes: Routes = [
   {
@@ -37,6 +39,12 @@ const routes: Routes = [
   },
   {
     path: 'view-business', component: ViewBusinessComponent
+  },
+  {
+    path: 'make-appointment', component: AddUserToSlotComponent
+  },
+  {
+    path: 'my-profile', component: MyProfileComponent
   },
 ];
 

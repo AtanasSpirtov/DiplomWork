@@ -16,8 +16,8 @@ export class BusinessService {
 
   private readonly apiUrl = 'http://localhost:8080';
 
-  getAllBusinesses(): Observable<Business[]> {
-    return this.http.get<Business[]>(`${this.apiUrl}/business/list`)
+  getAllBusinesses(forUser: boolean): Observable<Business[]> {
+    return this.http.get<Business[]>(`${this.apiUrl}/business/list/${forUser}`)
   }
 
   saveBusiness(business: Business): Observable<Message> {
@@ -26,5 +26,26 @@ export class BusinessService {
 
   deleteBusinessById(id: number): Observable<Message> {
     return this.http.delete<Message>(`${this.apiUrl}/business/delete/${id}`)
+  }
+
+  propagateSlotHoursForCurrentWeek(businessId: number) {
+    return this.http.post<Message>(`${this.apiUrl}/business/propagate-slots/${businessId}`, {})
+  }
+  addUserToBusinessSlot(businessId: number, slotId: number) {
+    console.log("here")
+    return this.http.post<Message>(`${this.apiUrl}/business/add-user-to-slot`, new AddUserToSlotRequest(businessId, slotId))
+  }
+
+}
+
+export class AddUserToSlotRequest {
+  businessId: number;
+
+  slotId: number;
+
+
+  constructor(businessId: number, slotId: number) {
+    this.businessId = businessId;
+    this.slotId = slotId;
   }
 }

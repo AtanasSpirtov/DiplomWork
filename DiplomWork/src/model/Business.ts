@@ -29,14 +29,16 @@ export class Slot {
   slotStartTime: string;
   slotEndTime: string;
   allUsers: LoggedUser[];
-
   maxUsers: number
 
+  date: string
 
-  constructor(slotStartTime: string, slotEndTime: string, allUsersInSlot: LoggedUser[], maxUsers: number) {
+
+  constructor(slotStartTime: string, slotEndTime: string, allUsersInSlot: LoggedUser[], maxUsers: number, date: string) {
     this.slotStartTime = slotStartTime;
     this.slotEndTime = slotEndTime;
     this.allUsers = allUsersInSlot;
-    this.maxUsers = maxUsers
+    this.maxUsers = maxUsers;
+    this.date = date;
   }
 }

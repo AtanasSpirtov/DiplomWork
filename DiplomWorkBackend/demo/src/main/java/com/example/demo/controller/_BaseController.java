@@ -17,4 +17,7 @@ public class _BaseController {
 
     @Autowired
     public BusinessService businessService;
+
+    @Autowired
+    public SecurityService securityService;
 }

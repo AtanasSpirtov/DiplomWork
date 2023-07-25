@@ -1,0 +1,48 @@
+<app-menu-page></app-menu-page>
+<div class="main-app main-app-layout pad">
+  <h1>My Profile</h1>
+  <mat-card>
+    <mat-card-title class="bottom-spaced-card primary-color">
+      Username: <b>{{user.username}}</b>
+    </mat-card-title>
+    <mat-card-title class="bottom-spaced-card">
+      Encrypted password: <b>{{convertUserPasswordToStars()}}</b>
+    </mat-card-title>
+    <mat-card-subtitle class="bottom-spaced-card">
+      Email: <b>{{user.email}}</b>
+    </mat-card-subtitle>
+    <mat-card-subtitle  class="bottom-spaced-card">
+      Phone: <b>{{user.phone}}</b>
+    </mat-card-subtitle>
+    <mat-card-title *ngIf="user.isBusiness == true"  class="bottom-spaced-card">
+      Business field: <b>{{user.businessType}}</b>
+    </mat-card-title>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Documentation and detailed information
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Currently application supports two roles: <b>User and Business creator</b></p>
+      <p><b>As user </b> you can search for businesses, see available slots and make appointment for given slot if it is free</p>
+      <p><b>As business creator</b> you can create different types of businesses. When you want to create business you have to:</p>
+      <ul>
+        <ol>Give your business name, location and telephone</ol>
+        <ol>Set a picture</ol>
+        <ol>Set business field</ol>
+        <ol>Configure your slots and number of users per slot</ol>
+      </ul>
+      <p>Every business has a week plan with slots. When new week begins every user has to propagate slots for next week or edit business</p>
+    </mat-expansion-panel>
+  </mat-card>
+  <div class="row spacer">
+    <div class="col">
+      <div class="pull-right">
+        <button mat-raised-button color="primary"
+                (click)="navigateBack()">
+          Back
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

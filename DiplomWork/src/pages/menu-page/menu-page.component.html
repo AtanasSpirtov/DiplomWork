@@ -1,16 +1,11 @@
-<mat-toolbar color="primary">
-  <img class="pull-right" alt="Costimize logo" src="{{ '/assets/images/Businesser.png' }}" width="10%" />
-  <ng-container *ngIf="false">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
+<mat-toolbar color="primary" class="toolbar-height">
+  <ng-container *ngIf="showMenuIcons()">
+  <button [matTooltip]="'My profile'" mat-icon-button aria-label="My profile" class="pull-left" (click)="navigateToMyProfile()">
+    <mat-icon>person</mat-icon>
+  </button>
+  <button [matTooltip]="'Log out'" mat-icon-button aria-label="Log out" class="pull-left" (click)="navigateToLoginAndClearLocalStorage()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
   </ng-container>
+  <img class="pull-right" alt="Costimize logo" src="{{ '/assets/images/Businesser.png' }}" width="10%" />
 </mat-toolbar>

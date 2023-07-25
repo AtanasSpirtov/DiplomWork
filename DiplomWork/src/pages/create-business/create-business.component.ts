@@ -106,7 +106,7 @@ export class CreateBusinessComponent implements OnInit {
       for (let i = 0; i < numberOfSplits; i++) {
         const start = startMinutes / 60 + i * splitSize;
         const end = startMinutes / 60 + (i + 1) * splitSize;
-        splits.push(new Slot(this.convertToHourFormat(Number(start)), this.convertToHourFormat(Number(end)), [], maxUsers));
+        splits.push(new Slot(this.convertToHourFormat(Number(start)), this.convertToHourFormat(Number(end)), [], maxUsers, null));
       }
       return (forOverview) ? splits.map(split => `${split.slotStartTime}h - ${split.slotEndTime}h `) : splits;
     }

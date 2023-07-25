@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {LoggedUser} from "../model/User";
+import {LoggedUser, User} from "../model/User";
 import {Message} from "../model/Message";
 import {Options} from "../model/Options";
 import {LoginResponse} from "../pages/login/login.component";
@@ -34,5 +34,9 @@ export class UserService {
   signUp(user: LoggedUser) {
     console.log(user)
     return this.http.post<Message>(`${this.apiUrl}/user/create`, user);
+  }
+
+  getUser() {
+    return this.http.get<LoggedUser>(`${this.apiUrl}/user/get`);
   }
 }

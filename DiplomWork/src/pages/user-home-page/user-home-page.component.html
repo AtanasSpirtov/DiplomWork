@@ -1,1 +1,112 @@
-<p>user-home-page works!</p>
+<app-menu-page></app-menu-page>
+<div class="main-app main-app-layout pad">
+  <h1>Search for</h1>
+  <h2>Business</h2>
+  <mat-card>
+    <mat-card-title class="bottom-spaced-card">Filter</mat-card-title>
+    <div class="spacer"></div>
+    <form [formGroup]="filterForm">
+      <div class="row">
+        <div class="col-3">
+          <mat-form-field class="full-width">
+            <mat-label>Business Name</mat-label>
+            <input matInput formControlName="businessName">
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="full-width">
+            <mat-label>Business Field</mat-label>
+            <input matInput formControlName="businessField">
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="full-width">
+            <mat-label>Telephone</mat-label>
+            <input matInput formControlName="telephone">
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field>
+            <mat-label>Select Day of Week</mat-label>
+            <mat-select formControlName="selectedDayOfWeek">
+              <mat-option *ngFor="let day of daysOfWeek" [value]="day">
+                {{ day }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2">
+          <button mat-raised-button color="primary" (click)="triggerFilter()"> Apply</button>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+  <div *ngFor="let business of filteredBusinesses" class="spacer">
+    <div class="row">
+      <mat-card class="bottom-spaced-card">
+        <div class="row">
+          <div class="col-4 margin">
+            <img [src]="getImage(business.picture)" alt="Image" class="picture">
+          </div>
+          <div class="col-3 margin">
+            <mat-card-title class="bottom-spaced-card primary-color">{{business.name}}</mat-card-title>
+            <mat-card-title class="bottom-spaced-mat-title relative-size">{{business.businessField}}</mat-card-title>
+            <mat-card-content class="grey-color">
+              <mat-card-subtitle class="bottom-spaced-card">
+                <b>Location:</b> {{business.location}}
+              </mat-card-subtitle>
+              <mat-card-subtitle class="bottom-spaced-card">
+                <b>Telephone:</b> {{business.telephone}}
+              </mat-card-subtitle>
+              <mat-card-subtitle class="bottom-spaced-card">
+                <b>Start time:</b> {{business.startTime}}
+              </mat-card-subtitle>
+              <mat-card-subtitle class="bottom-spaced-card">
+                <b>End time:</b> {{business.endTime}}
+              </mat-card-subtitle>
+              <mat-card-subtitle class="bottom-spaced-card">
+                <b>Max users per slot:</b> {{getMaxUsersPerSlot(business)}}
+              </mat-card-subtitle>
+            </mat-card-content>
+          </div>
+          <div class="col-3 margin">
+            <mat-card-title class="bottom-spaced-card primary-color">Available slots for today</mat-card-title>
+            <mat-card-subtitle class="bottom-spaced-card">
+              <b>Slot characteristics:</b>
+            </mat-card-subtitle>
+            <div class="record-container" *ngFor="let slot of getAvailableSlotsForToday(business.workingSlots)">
+              <mat-card-subtitle>{{getSlotStartAndEndTime(slot)}}</mat-card-subtitle>
+              <ng-container *ngIf="!hasFreeSpace(slot)">
+                <mat-card [matTooltip]="getUserNamesWithEmails(slot.allUsers)"
+                          class="slot background-error-color"></mat-card>
+              </ng-container>
+              <ng-container *ngIf="hasFreeSpace(slot)">
+                <mat-card [matTooltip]="getUserNamesWithEmails(slot.allUsers)"
+                          class="slot background-primary-color"></mat-card>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-1">
+            <mat-card-title class="bottom-spaced-card primary-color">Actions</mat-card-title>
+            <div class="spacer"></div>
+            <mat-card-subtitle class="bottom-spaced-card">
+              <em class="material-icons  mat-icon-button costimize-material-icon mat-primary"
+                  (click)="viewBusiness(business.id)"
+                  [matTooltip]="'View business details'"
+              >visibility</em>
+            </mat-card-subtitle>
+            <div class="spacer"></div>
+            <mat-card-subtitle class="bottom-spaced-card">
+              <em class="material-icons  mat-icon-button costimize-material-icon mat-primary"
+                  (click)="makeAppointment(business.id)"
+                  [matTooltip]="'Make an appointment'"
+              >edit</em>
+            </mat-card-subtitle>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

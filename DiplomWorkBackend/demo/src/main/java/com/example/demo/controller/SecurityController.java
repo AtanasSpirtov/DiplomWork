@@ -5,6 +5,7 @@ import com.example.demo.controller.dto.UserDTO;
 import com.example.demo.model.BusinessEnum;
 import com.example.demo.model.User;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,5 +41,10 @@ public class SecurityController extends _BaseController {
     @GetMapping("/login")
     public ResponseEntity<MessageDTO> successfulAuthentication() {
         return ResponseEntity.ok(new MessageDTO("Succesfull Authentication"));
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<User> profileInformation() {
+        return ResponseEntity.ok(securityService.getUserByUsername((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
     }
 }

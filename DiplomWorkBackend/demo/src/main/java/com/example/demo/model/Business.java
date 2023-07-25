@@ -3,10 +3,7 @@ package com.example.demo.model;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.sun.istack.NotNull;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,9 +29,36 @@ public class Business extends _BaseEntity {
     @NotNull
     private LocalDateTime endTime;
 
-    @OneToMany(cascade = CascadeType.ALL )
-    private List<Slot> workingSlots;
+        @OneToMany(cascade = CascadeType.ALL )
+        private List<Slot> workingSlots;
 
+    @Column(columnDefinition = "NUMERIC DEFAULT 9")
+    private Long userId;
+
+    public Business(String name, String location, String telephone, byte[] picture, String businessField, LocalDateTime startTime, LocalDateTime endTime, List<Slot> allSlotsPropagated, Long userId) {
+        super();
+        this.name = name;
+        this.location = location;
+        this.telephone = telephone;
+        this.picture = picture;
+        this.businessField = businessField;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.workingSlots = allSlotsPropagated;
+        this.userId = userId;
+    }
+
+    public Business() {
+
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getName() {
         return name;

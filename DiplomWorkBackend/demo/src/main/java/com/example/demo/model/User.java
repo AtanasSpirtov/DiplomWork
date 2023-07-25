@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -46,6 +47,15 @@ public class User extends _BaseEntity {
     }
 
     public User() {
+    }
+
+    public User(User user) {
+        this.password = user.getPassword();
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.phone = user.getPhone();
+        this.business = user.getBusiness();
+        this.isBusiness = user.isBusiness;
     }
 
     public String getUsername() {
@@ -108,5 +118,22 @@ public class User extends _BaseEntity {
         return this.roles.stream().flatMap(role ->
                 role.getAuthority().stream().map(authority ->
                         new SimpleGrantedAuthority(authority.getAuthorityName()))).toList();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        _BaseEntity other = (_BaseEntity) obj;
+        return Objects.equals(getId(), other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

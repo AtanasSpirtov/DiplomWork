@@ -1,23 +1,18 @@
 @import "src/variables.scss";
-
 .pad {
   padding: $gcp-margin
 }
 .margin {
-  margin: $gcp-margin
+  margin-top: $gcp-margin;
+  margin-bottom: $gcp-margin
 }
-.picture {
-  max-width: 500px;
-  max-height: 300px;
-}
-
 .slot {
   width: 60px;
   height: 30px;
 }
 .record-container {
   display: inline-block;
-  margin-right: 10px;
+  margin: 10px;
 }
 
 .background-error-color {
@@ -25,4 +20,8 @@
 }
 .background-primary-color {
   background-color: $primary-color
+}
+.picture {
+  max-width: 500px;
+  max-height: 400px;
 }

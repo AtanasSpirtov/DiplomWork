@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-menu-page',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
   }
 
+  showMenuIcons() {
+    return localStorage.getItem('token') != null
+  }
+
+  navigateToLoginAndClearLocalStorage() {
+    this.userService.logout()
+    this.router.navigate(['login'])
+  }
+
+  navigateToMyProfile() {
+    this.router.navigate(['my-profile'])
+  }
 }

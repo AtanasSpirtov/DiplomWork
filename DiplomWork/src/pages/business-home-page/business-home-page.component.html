@@ -63,10 +63,9 @@
               (click)="editBusiness(business.id)">mode_edit</em>
           <em class="material-icons  mat-icon-button costimize-material-icon mat-primary"
               (click)="deleteBusiness(business.id)">delete</em>
-<!--          <i *ngIf="kpi.properties.requiredProjectsWithoutAccess.length>0"-->
-<!--             class="material-icons costimize-material-icon warn-color"-->
-<!--             matTooltip="This KPI was defined for projects {{getProjectsWithoutAccess(kpi)}} that are currently not in the scope of this service account."-->
-<!--             matTooltipPosition="right">warning</i>-->
+          <em class="material-icons  mat-icon-button costimize-material-icon mat-primary"
+              (click)="propagateHoursForCurrentWeek(business.id)"
+              mat-tooltip="Propagate slots configuration for current week">event</em>
         </td>
 
       </ng-container>

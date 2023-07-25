@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Business} from "../../model/Business";
+import {Business, Slot} from "../../model/Business";
 import {Router} from "@angular/router";
 import {BusinessService} from "../../service/business.service";
 import {take} from "rxjs";
@@ -22,8 +22,24 @@ export class BusinessHomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.businessService.getAllBusinesses()
-      .subscribe(businesses => this.allBusinesses = businesses)
+    const currentDate = new Date();
+    const currentDayOfWeek = currentDate.getDay();
+
+    const daysUntilSunday = currentDayOfWeek === 0 ? 0 : 7 - currentDayOfWeek;
+
+    const endOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + daysUntilSunday);
+
+    this.businessService.getAllBusinesses(false)
+      .subscribe(allBusinesses => {
+        allBusinesses.forEach((business: Business) => {
+            business.workingSlots = business.workingSlots.filter((slot: Slot) => {
+              const slotDate = new Date(slot.date);
+              return slotDate.getDate() >= currentDate.getDate() && slotDate.getDate() <= endOfWeek.getDate();
+            });
+          }
+        )
+        this.allBusinesses = allBusinesses
+      })
   }
 
   goToCreateBusiness() {
@@ -54,10 +70,14 @@ export class BusinessHomePageComponent implements OnInit {
       .subscribe(confirmed => {
         if (confirmed) {
           this.businessService.deleteBusinessById(id).subscribe( _ =>
-            this.businessService.getAllBusinesses()
+            this.businessService.getAllBusinesses(false)
               .subscribe(businesses => this.allBusinesses = businesses)
           )
         }
       });
+  }
+
+  propagateHoursForCurrentWeek(businessId: number) {
+    this.businessService.propagateSlotHoursForCurrentWeek(businessId).subscribe()
   }
 }

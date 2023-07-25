@@ -1,0 +1,36 @@
+<app-menu-page></app-menu-page>
+<div class="main-app main-app-layout pad">
+  <h1>Make appointment</h1>
+  <div class="row">
+    <div class="col-6">
+      <mat-card class="retain-height spacer">
+        <mat-card-title class="bottom-spaced-card primary-color">All slots for current week</mat-card-title>
+        <mat-card-subtitle class="bottom-spaced-card">
+          <b>Slot overview:</b>
+        </mat-card-subtitle>
+        <div class="record-container" *ngFor="let slot of business.workingSlots">
+          <mat-card-subtitle class="margin-0">{{getSlotStartAndEndTime(slot)}}</mat-card-subtitle>
+          <ng-container *ngIf="hasNoFreeSpaceOrPassed(slot)">
+            <mat-card [matTooltip]="getUserNamesWithEmails(slot.allUsers)"
+                      class="slot background-error-color"></mat-card>
+          </ng-container>
+          <ng-container *ngIf="!hasNoFreeSpaceOrPassed(slot)">
+            <mat-card [matTooltip]="getUserNamesWithEmails(slot.allUsers)" class="slot background-primary-color"
+                      (click)="writeForSlot(business.id , slot.id)"
+            ></mat-card>
+          </ng-container>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row spacer">
+    <div class="col">
+      <div class="pull-right">
+        <button mat-raised-button color="primary"
+                (click)="navigateBack()">
+          Back
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
