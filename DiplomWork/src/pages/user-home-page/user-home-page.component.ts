@@ -69,7 +69,7 @@ export class UserHomePageComponent implements OnInit {
   }
 
   getAvailableSlotsForToday(workingSlots: Slot[]) {
-    return workingSlots.sort((slot1, slot2) => {
+    return workingSlots.filter(slot => new Date(slot.date).getDate() == new Date().getDate()).sort((slot1, slot2) => {
       if (slot1.slotStartTime < slot2.slotEndTime) {
         return -1;
       } else if (slot1.slotStartTime > slot2.slotEndTime) {
@@ -103,8 +103,8 @@ export class UserHomePageComponent implements OnInit {
       .filter(business =>this.filterForm.get("telephone").value == null || business.telephone.toLowerCase().includes(this.filterForm.get("telephone").value.toLowerCase()))
       .filter(business => {
         const currentDate = new Date();
-        const diffDays = this.daysOfWeek.indexOf(this.filterForm.get("selectedDayOfWeek").value) - currentDate.getDay();
-        const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth(),currentDate.getDate() + diffDays);
+        const diffDays = this.daysOfWeek.indexOf(this.filterForm.get("selectedDayOfWeek").value) - currentDate.getDay() - 1;
+        const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth(),currentDate.getDate() - diffDays);
         console.log(newDate)
         return this.filterForm.get("selectedDayOfWeek").value == null || business.workingSlots.some(slot =>new Date(slot.date).getDate() == newDate.getDate())
       })
